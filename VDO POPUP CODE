@@ -1,0 +1,54 @@
+<!-- Include FancyBox CSS and JS files -->
+<link rel="stylesheet" href="path/to/fancybox.css" />
+<script src="path/to/jquery.js"></script>
+<script src="path/to/fancybox.js"></script>
+
+<!-- Iterate through Magento 2 product list -->
+<?php foreach ($_productCollection as $_product): ?>
+    <!-- Get YouTube Video ID dynamically -->
+    <?php $youtubeVideoId = getVideoId($_product); ?>
+
+    <!-- Generate HTML markup with YouTube Video ID -->
+    <a href="https://www.youtube.com/watch?v=<?php echo $youtubeVideoId; ?>" class="fancybox" data-fancybox="gallery">
+        <img src="<?php echo $_product->getImageUrl(); ?>" alt="<?php echo $_product->getName(); ?>" />
+    </a>
+<?php endforeach; ?>
+
+<!-- Initialize FancyBox -->
+<script>
+    $(document).ready(function () {
+        $(".fancybox").fancybox();
+    });
+</script>
+
+
+
+
+
+
+
+<!-- Include Magnific Popup CSS and JS files -->
+<link rel="stylesheet" href="path/to/magnific-popup.css">
+<script src="path/to/jquery.js"></script>
+<script src="path/to/jquery.magnific-popup.js"></script>
+
+<!-- Add a link/button on your Magento 2 category page -->
+<a href="#" class="open-lightbox" data-youtube-id="YOUR_DYNAMIC_VIDEO_ID">Open Video</a>
+
+<!-- Initialize Magnific Popup script -->
+<script>
+  $(document).ready(function() {
+    $('.open-lightbox').magnificPopup({
+      type: 'iframe',
+      iframe: {
+        patterns: {
+          youtube: {
+            index: 'youtube.com/',
+            id: 'v=',
+            src: 'https://www.youtube.com/embed/%id%?autoplay=1'
+          }
+        }
+      }
+    });
+  });
+</script>
